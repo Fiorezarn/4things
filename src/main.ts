@@ -1,5 +1,3 @@
-import * as dotenv from 'dotenv';
-dotenv.config(); // Memuat file .env
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './modules/app.module';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';

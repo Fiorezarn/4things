@@ -25,7 +25,7 @@ export class reviewModel extends Model {
 
   @ForeignKey(() => UserModel)
   @Column({
-    type: DataType.CHAR(255),
+    type: DataType.UUID,
     allowNull: false,
   })
   user_id: number;

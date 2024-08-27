@@ -20,7 +20,6 @@ export class productModel extends Model {
   @Column({
     type: DataType.CHAR(255),
     allowNull: false,
-    unique: true,
   })
   product_name: string;
 
@@ -32,10 +31,11 @@ export class productModel extends Model {
 
   @ForeignKey(() => UserModel)
   @Column({
-    type: DataType.CHAR(255),
+    type: DataType.UUID, // Gunakan tipe data UUID yang sama
     allowNull: false,
   })
-  user_id: number;
+  user_id: string;
+
   @BelongsTo(() => UserModel)
   user: UserModel;
 

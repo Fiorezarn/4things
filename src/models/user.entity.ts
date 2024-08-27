@@ -4,7 +4,8 @@ import { productModel } from './product.entity';
 @Table({ tableName: 'users' })
 export class UserModel extends Model {
   @Column({
-    type: DataType.CHAR(255),
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
   })
   user_id: string;
@@ -22,8 +23,16 @@ export class UserModel extends Model {
   username: string;
 
   @Column({
+    type: DataType.CHAR(255),
+    allowNull: false,
+    unique: true,
+  })
+  email: string;
+
+  @Column({
     allowNull: true,
     type: DataType.CHAR(255),
+    defaultValue: 'user',
   })
   role: string;
 

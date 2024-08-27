@@ -22,9 +22,9 @@ export const databaseProviders = [
         categoryModel,
       ]);
       await sequelize.sync({
-        alter: true,
-        force: true,
-        // alter: process.env.APP_MODE == 'production' ? false : true,
+        // alter: true,
+        // force: true,
+        alter: process.env.APP_MODE == 'production' ? false : true,
       });
 
       return sequelize;
