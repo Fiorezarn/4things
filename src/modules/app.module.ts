@@ -17,6 +17,8 @@ import { ProductService } from 'src/services/product.service';
 import { ProductController } from 'src/controllers/product.controller';
 import { ReviewController } from 'src/controllers/review.controller';
 import { ReviewService } from 'src/services/review.service';
+import { CategoryService } from 'src/services/category.service';
+import { CategoryController } from 'src/controllers/category.controller';
 
 @Module({
   imports: [
@@ -36,6 +38,7 @@ import { ReviewService } from 'src/services/review.service';
     UserController,
     ProductController,
     ReviewController,
+    CategoryController,
   ],
   providers: [
     AppService,
@@ -45,6 +48,7 @@ import { ReviewService } from 'src/services/review.service';
     ...productProviders,
     ReviewService,
     ...reviewProviders,
+    CategoryService,
     ...categoryProviders,
     ResponseHelper,
   ],
