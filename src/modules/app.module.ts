@@ -11,9 +11,17 @@ import { categoryProviders } from 'src/providers/category.provider';
 import { UserService } from 'src/services/user.service';
 import { UserController } from 'src/controllers/user.controller';
 import { ResponseHelper } from 'src/helpers/response.helpers';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { ProductService } from 'src/services/product.service';
+import { ProductController } from 'src/controllers/product.controller';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'public'),
+      serveRoot: '/static',
+    }),
     DatabaseModule,
     ConfigModule.forRoot(),
     JwtModule.register({
@@ -21,11 +29,12 @@ import { ResponseHelper } from 'src/helpers/response.helpers';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController, UserController, ProductController],
   providers: [
     AppService,
     UserService,
     ...userProviders,
+    ProductService,
     ...productProviders,
     ...reviewProviders,
     ...categoryProviders,

@@ -7,6 +7,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { UserModel } from './user.entity';
+import { categoryModel } from './category.entity';
 
 @Table({ tableName: 'product' })
 export class productModel extends Model {
@@ -31,7 +32,7 @@ export class productModel extends Model {
 
   @ForeignKey(() => UserModel)
   @Column({
-    type: DataType.UUID, // Gunakan tipe data UUID yang sama
+    type: DataType.UUID,
     allowNull: false,
   })
   user_id: string;
@@ -39,17 +40,19 @@ export class productModel extends Model {
   @BelongsTo(() => UserModel)
   user: UserModel;
 
+  @ForeignKey(() => categoryModel)
   @Column({
-    type: DataType.CHAR(50),
-    allowNull: false,
+    type: DataType.INTEGER,
   })
-  category: string;
+  category_id: number;
+  @BelongsTo(() => categoryModel)
+  category: categoryModel;
 
   @Column({
     type: DataType.CHAR(255),
     allowNull: false,
   })
-  pruduct_image: string;
+  file: string;
 
   @Column({
     type: DataType.CHAR(32),

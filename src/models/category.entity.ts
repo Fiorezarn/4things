@@ -5,7 +5,9 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
+import { productModel } from './product.entity';
 
 @Table({ tableName: 'category' })
 export class categoryModel extends Model {
@@ -32,4 +34,7 @@ export class categoryModel extends Model {
     type: DataType.CHAR(32),
   })
   updated_by: string;
+
+  @HasMany(() => productModel)
+  products: productModel[];
 }
