@@ -15,6 +15,8 @@ import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ProductService } from 'src/services/product.service';
 import { ProductController } from 'src/controllers/product.controller';
+import { ReviewController } from 'src/controllers/review.controller';
+import { ReviewService } from 'src/services/review.service';
 
 @Module({
   imports: [
@@ -29,13 +31,19 @@ import { ProductController } from 'src/controllers/product.controller';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [AppController, UserController, ProductController],
+  controllers: [
+    AppController,
+    UserController,
+    ProductController,
+    ReviewController,
+  ],
   providers: [
     AppService,
     UserService,
     ...userProviders,
     ProductService,
     ...productProviders,
+    ReviewService,
     ...reviewProviders,
     ...categoryProviders,
     ResponseHelper,

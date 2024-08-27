@@ -5,9 +5,11 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
 import { UserModel } from './user.entity';
 import { categoryModel } from './category.entity';
+import { reviewModel } from './review.entity';
 
 @Table({ tableName: 'product' })
 export class productModel extends Model {
@@ -63,4 +65,7 @@ export class productModel extends Model {
     type: DataType.CHAR(32),
   })
   updated_by: string;
+
+  @HasMany(() => reviewModel)
+  review: reviewModel[];
 }

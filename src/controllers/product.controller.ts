@@ -115,8 +115,8 @@ export class ProductController {
     @UploadedFile() file?: Express.Multer.File,
   ) {
     try {
-      const product = await this.productService.getProductById(id);
-      if (!product) {
+      const products = await this.productService.getProductById(id);
+      if (!products) {
         return this.responseHelper.responseClientError(
           res,
           404,

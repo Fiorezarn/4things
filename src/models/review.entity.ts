@@ -7,6 +7,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { UserModel } from './user.entity';
+import { productModel } from './product.entity';
 
 @Table({ tableName: 'review' })
 export class reviewModel extends Model {
@@ -19,18 +20,24 @@ export class reviewModel extends Model {
 
   @Column({
     type: DataType.TEXT,
-    allowNull: false,
   })
   review_value: string;
 
   @ForeignKey(() => UserModel)
   @Column({
     type: DataType.UUID,
-    allowNull: false,
   })
   user_id: number;
   @BelongsTo(() => UserModel)
   user: UserModel;
+
+  @ForeignKey(() => productModel)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  product_id: number;
+  @BelongsTo(() => productModel)
+  product: productModel;
 
   @Column({
     type: DataType.CHAR(32),
