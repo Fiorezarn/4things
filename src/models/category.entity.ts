@@ -1,0 +1,35 @@
+import {
+  Column,
+  Table,
+  Model,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
+
+@Table({ tableName: 'category' })
+export class categoryModel extends Model {
+  @Column({
+    type: DataType.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  })
+  category_id: number;
+
+  @Column({
+    type: DataType.CHAR(50),
+    allowNull: false,
+    unique: true,
+  })
+  category_name: string;
+
+  @Column({
+    type: DataType.CHAR(32),
+  })
+  created_by: string;
+
+  @Column({
+    type: DataType.CHAR(32),
+  })
+  updated_by: string;
+}
