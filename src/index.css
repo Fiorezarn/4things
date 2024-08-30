@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  nav input {
+    width: 320px;
+  }
+
+  .question {
+    width: 80%;
+  }
+
+  input {
+    border: none;
+  }
+}
