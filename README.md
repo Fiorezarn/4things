@@ -24,14 +24,25 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
   - **Tailwind CSS:** Framework CSS untuk desain yang responsif dan modern.
 
 - **Backend:**
-  - **Express.js:** Framework web untuk Node.js.
-  - **MongoDB:** Basis data NoSQL untuk menyimpan data pengguna, produk, dan pertanyaan.
+  - **Nest.js:** Framework web untuk Node.js.
+  - **MySQL:** Basis data SQL untuk menyimpan data pengguna, produk, dan pertanyaan.
 
 ## Instalasi dan Cara Menjalankan Proyek
 
-### 1. Clone Repositori
+### 1. Clone Repositori Front-End
 
 ```bash
-git clone -b 4thing-fe https://github.com/Fiorezarn/4things.git
-cd repository-name
+git clone -b 4things-fe https://github.com/Fiorezarn/4things.git
+cd 4things-fe
+npm i
+npm run dev
+```
+
+### 2. Clone Repositori Back-End
+
+```bash
+git clone -b 4things-be https://github.com/Fiorezarn/4things.git
+cd 4things-be
+npm i
+npm run start:dev
 ```
