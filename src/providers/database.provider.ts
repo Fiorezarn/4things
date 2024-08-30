@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { categoryModel } from 'src/models/category.entity';
+import { LikesModel } from 'src/models/likes.entity';
 import { productModel } from 'src/models/product.entity';
 import { reviewModel } from 'src/models/review.entity';
 import { UserModel } from 'src/models/user.entity';
@@ -20,6 +21,7 @@ export const databaseProviders = [
         productModel,
         reviewModel,
         categoryModel,
+        LikesModel,
       ]);
       await sequelize.sync({
         // alter: true,

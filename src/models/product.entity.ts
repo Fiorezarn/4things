@@ -27,7 +27,7 @@ export class productModel extends Model {
   product_name: string;
 
   @Column({
-    type: DataType.CHAR(255),
+    type: DataType.TEXT,
     allowNull: false,
   })
   product_desc: string;
@@ -42,17 +42,14 @@ export class productModel extends Model {
   @BelongsTo(() => UserModel)
   user: UserModel;
 
-  @ForeignKey(() => categoryModel)
   @Column({
     type: DataType.INTEGER,
   })
   category_id: number;
-  @BelongsTo(() => categoryModel)
-  category: categoryModel;
 
   @Column({
     type: DataType.CHAR(255),
-    allowNull: false,
+    allowNull: true,
   })
   file: string;
 

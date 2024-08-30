@@ -20,15 +20,26 @@ export class ReviewController {
     private readonly responseHelper: ResponseHelper,
   ) {}
 
+  @Get()
+  async getAllReview(@Res() res: Response) {
+    try {
+      const data = await this.reviewService.getAllReview();
+      return this.responseHelper.responseSuccessData(res, 200, 'success', data);
+    } catch (error) {
+      return this.responseHelper.responseServerError(res);
+    }
+  }
+
   @Get('/:id')
   async getReview(@Param('id') id: string, @Res() res: Response) {
     try {
       const data = await this.reviewService.getReviewByProductId(id);
       if (!data) {
-        return this.responseHelper.responseClientError(
+        return this.responseHelper.responseSuccessData(
           res,
-          404,
-          `Review dengan id ${id} tidak ditemukan`,
+          200,
+          'Data Kosong',
+          [],
         );
       }
       return this.responseHelper.responseSuccessData(res, 200, 'success', data);
@@ -66,6 +77,17 @@ export class ReviewController {
         );
       }
       const data = await this.reviewService.deleteReview(id);
+      return this.responseHelper.responseSuccessData(res, 200, 'success', data);
+    } catch (error) {
+      console.log(error);
+      return this.responseHelper.responseServerError(res);
+    }
+  }
+
+  @Delete('/product/:id')
+  async deleteReviewByProductId(@Param('id') id: number, @Res() res: Response) {
+    try {
+      const data = await this.reviewService.deleteReviewByProductId(id);
       return this.responseHelper.responseSuccessData(res, 200, 'success', data);
     } catch (error) {
       console.log(error);

@@ -34,7 +34,4 @@ export class categoryModel extends Model {
     type: DataType.CHAR(32),
   })
   updated_by: string;
-
-  @HasMany(() => productModel)
-  products: productModel[];
 }

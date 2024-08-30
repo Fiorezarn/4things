@@ -29,7 +29,7 @@ export class ProductController {
     try {
       const product = await this.productService.getAllProduct();
       const products = product.map((product) => ({
-        product,
+        ...product,
         product_image: `${process.env.BASED_URL}/static/${product.file}`,
       }));
 
@@ -40,6 +40,51 @@ export class ProductController {
         products,
       );
     } catch (error) {}
+  }
+
+  @Get('/trending')
+  async getTrendingProduct(@Res() res: Response) {
+    try {
+      const product = await this.productService.getTrendingProduct();
+      const products = product.map((product) => ({
+        ...product,
+        product_image: `${process.env.BASED_URL}/static/${product.file}`,
+      }));
+
+      return this.responseHelper.responseSuccessData(
+        res,
+        200,
+        'Berhasil mendapatkan data product',
+        products,
+      );
+    } catch (error) {}
+  }
+
+  @Get('user/:id')
+  async getProductByUser(@Res() res: Response, @Param('id') id: number) {
+    try {
+      const product = await this.productService.getProductByUser(id);
+      const products = product.map((product) => ({
+        ...product,
+        product_image: `${process.env.BASED_URL}/static/${product.file}`,
+      }));
+      if (!product) {
+        return this.responseHelper.responseClientError(
+          res,
+          404,
+          'Product tidak ditemukan',
+        );
+      }
+
+      return this.responseHelper.responseSuccessData(
+        res,
+        200,
+        'Berhasil mendapatkan data product',
+        products,
+      );
+    } catch (error) {
+      return this.responseHelper.responseServerError(res);
+    }
   }
 
   @Get('/:id')
@@ -53,6 +98,7 @@ export class ProductController {
           'Product tidak ditemukan',
         );
       }
+
       const product_image = `${process.env.BASED_URL}/static/${product.file}`;
 
       return this.responseHelper.responseSuccessData(
@@ -61,7 +107,9 @@ export class ProductController {
         'Berhasil mendapatkan data product',
         { product, product_image },
       );
-    } catch (error) {}
+    } catch (error) {
+      return this.responseHelper.responseServerError(res);
+    }
   }
 
   @Post()
@@ -73,8 +121,8 @@ export class ProductController {
   ) {
     try {
       const filePath = `public/${file.originalname}`;
-      fs.writeFileSync(filePath, file.buffer);
 
+      fs.writeFileSync(filePath, file.buffer);
       const productData = {
         product_name: product.product_name,
         product_desc: product.product_desc,
@@ -83,6 +131,7 @@ export class ProductController {
         file: file.originalname,
         created_by: product.created_by,
       };
+
       const createdPembayaran =
         await this.productService.createProduct(productData);
       return this.responseHelper.responseSuccessData(
@@ -93,7 +142,7 @@ export class ProductController {
       );
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        if (error.fields.materi) {
+        if (error.fields.product_name) {
           return this.responseHelper.responseClientError(
             res,
             400,
@@ -101,7 +150,6 @@ export class ProductController {
           );
         }
       }
-      console.log(error);
       return this.responseHelper.responseServerError(res);
     }
   }

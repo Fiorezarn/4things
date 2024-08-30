@@ -5,6 +5,14 @@ import { reviewModel } from 'src/models/review.entity';
 export class ReviewService {
   constructor(@Inject('REVIEW_REPOSITORY') private readonly reviewRepository) {}
 
+  async getAllReview() {
+    try {
+      return await this.reviewRepository.findAll();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getReviewById(id) {
     try {
       return await this.reviewRepository.findOne({ where: { review_id: id } });
@@ -23,7 +31,7 @@ export class ReviewService {
   }
 
   async getReviewByProductId(id) {
-    return await this.reviewRepository.findOne({ where: { product_id: id } });
+    return await this.reviewRepository.findAll({ where: { product_id: id } });
   }
 
   async deleteReview(id: number) {
@@ -32,6 +40,16 @@ export class ReviewService {
         where: { review_id: id },
       });
       return await review.destroy();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteReviewByProductId(id: number) {
+    try {
+      return await this.reviewRepository.destroy({
+        where: { product_id: id },
+      });
     } catch (error) {
       throw error;
     }
