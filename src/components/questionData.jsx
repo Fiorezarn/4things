@@ -9,8 +9,15 @@ import CommentSection from "./CommentSection";
 import { CiMenuKebab } from "react-icons/ci";
 import { Dropdown } from "flowbite-react";
 import FormQuestion from "./formQuestion";
+import DeleteModal from "../components/DeleteModal";
 
 export default function QuestionData(props) {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const openDeleteModal = (review) => {
+    setEditingCategory(review);
+    setIsDeleteModalOpen(true);
+  };
   function cardElement(allReview) {
     const navigate = useNavigate();
     const reviews = allReview.data;
@@ -94,9 +101,13 @@ export default function QuestionData(props) {
 
       const handleDelete = async () => {
         try {
-          await axios.delete(`${BASE_URL}/likes/${review.product_id}`);
-          await axios.delete(`${BASE_URL}/review/product/${review.product_id}`);
-          await axios.delete(`${BASE_URL}/product/${review.product_id}`);
+          await axios.delete(`${BASE_URL}/likes/${editingCategory.product_id}`);
+          await axios.delete(
+            `${BASE_URL}/review/product/${editingCategory.product_id}`
+          );
+          await axios.delete(
+            `${BASE_URL}/product/${editingCategory.product_id}`
+          );
           window.location.reload();
         } catch (error) {
           console.error("Error deleting product, reviews, or likes:", error);
@@ -119,7 +130,10 @@ export default function QuestionData(props) {
                 </span>
               )}
             >
-              <Dropdown.Item as="button" onClick={handleDelete}>
+              <Dropdown.Item
+                as="button"
+                onClick={() => openDeleteModal(review)}
+              >
                 Delete
               </Dropdown.Item>
             </Dropdown>
@@ -157,6 +171,12 @@ export default function QuestionData(props) {
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
+          <DeleteModal
+            isOpen={isDeleteModalOpen}
+            categoryName={editingCategory?.product_name}
+            onDelete={handleDelete}
+            onCancel={() => setIsDeleteModalOpen(false)}
+          />
         </div>
       );
     });

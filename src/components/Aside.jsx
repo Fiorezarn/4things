@@ -20,45 +20,45 @@ export default function Aside() {
 
   return (
     <aside className="w-96 p-4 h-1/2 border-2 rounded-2xl">
-      <div className="grid gap-4 justify-items-center">
+      <div className="grid gap-4">
         <a
           href={routes.home}
-          className={`flex items-center gap-2 rounded-xl py-2 px-4 font-bold text-md text-center ${
+          className={`flex items-center justify-center gap-2 rounded-xl py-3 px-6 font-bold text-md text-center ${
             currentPath === routes.home
               ? "bg-red-400 text-white"
               : "hover:bg-red-400 hover:text-white"
           }`}
         >
-          <IoIosHome />
-          Home
+          <IoIosHome size={24} />
+          <span>Home</span>
         </a>
         <a
           href={routes.trending}
-          className={`flex items-center gap-2 rounded-xl py-2 px-4 font-bold text-md text-center ${
+          className={`flex items-center justify-center gap-2 rounded-xl py-3 px-6 font-bold text-md text-center ${
             currentPath === routes.trending
               ? "bg-red-400 text-white"
               : "hover:bg-red-400 hover:text-white"
           }`}
         >
-          <FaFireFlameCurved />
-          Trending
+          <FaFireFlameCurved size={24} />
+          <span>Trending</span>
         </a>
         <a
           href={routes.questions}
           onClick={(e) => {
             if (!token) {
-              e.preventDefault(); // Mencegah pengguna yang tidak login mengklik
-              navigate("/login"); // Arahkan ke halaman login
+              e.preventDefault();
+              navigate("/login");
             }
           }}
-          className={`flex items-center gap-2 rounded-xl py-2 px-4 font-bold text-md text-center ${
+          className={`flex items-center justify-center gap-2 rounded-xl py-3 px-6 font-bold text-md text-center ${
             currentPath === routes.questions
               ? "bg-red-400 text-white"
               : "hover:bg-red-400 hover:text-white"
           }`}
         >
-          <BsQuestionDiamond size={20} />
-          My Questions
+          <BsQuestionDiamond size={24} />
+          <span>My Questions</span>
         </a>
       </div>
     </aside>

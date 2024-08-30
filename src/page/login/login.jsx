@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Banner from "../../assets/business-discussion.svg";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -26,12 +27,20 @@ export default function Login() {
         sessionStorage.setItem("userInfo", JSON.stringify(data.data.user));
         const userInfo = sessionStorage.getItem("userInfo");
         const user = userInfo ? JSON.parse(userInfo).role : null;
-        console.log(user);
         if (user === "admin") {
           navigate("/admin");
         } else if (user === "user") {
-          alert("Login Successful!");
-          navigate("/");
+          toast.success("Login Successful", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => navigate("/"), 2500);
         }
       } else {
         setError("Login failed. Please check your credentials.");
@@ -43,12 +52,24 @@ export default function Login() {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+      />
       <Navbar />
       <div className="bg-gray-100 flex justify-center items-center h-screen">
         <div className="w-1/2 h-screen hidden lg:block">
           <img src={Banner} alt="Placeholder Image" className="mt-10" />
         </div>
-
         <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
           <h1 className="text-2xl font-semibold mb-4">Login</h1>
           <form onSubmit={handleSubmit}>

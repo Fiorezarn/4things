@@ -12,6 +12,7 @@ import Forgot from "./page/forgotpassword/forgot";
 import Trending, { loader as trendingLoader } from "./page/trending/trending";
 import Question, { loader as questionLoader } from "./page/question/question";
 import Admin from "./page/dashboard/dashboard";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

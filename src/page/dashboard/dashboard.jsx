@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SidebarAdmin from "../../components/SidebarAdmin";
+import { ToastContainer, toast } from "react-toastify";
+import EditModal from "../../components/EditModal";
+import DeleteModal from "../../components/DeleteModal";
+import { Await, useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const [error, setError] = useState(null);
   const [categoryList, setCategoryList] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem("accessToken");
+
+    if (!isLoggedIn) {
+      return navigate("/login");
+    }
     async function fetchCategories() {
       try {
         const response = await axios.get(`${BASE_URL}/category`);
@@ -26,14 +37,28 @@ export default function Dashboard() {
     setCategoryList([...categoryList, newCategory]);
   };
 
-  const handleDelete = async (categoryId) => {
+  const handleDelete = async () => {
     try {
-      await axios.delete(`${BASE_URL}/category/${categoryId}`);
+      await axios.delete(`${BASE_URL}/category/${editingCategory.category_id}`);
       setCategoryList(
-        categoryList.filter((category) => category.category_id !== categoryId)
+        categoryList.filter(
+          (category) => category.category_id !== editingCategory.category_id
+        )
       );
+      setIsDeleteModalOpen(false);
+      toast.success("Category Deleted", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (err) {
       console.error("Error deleting category:", err);
+      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -42,6 +67,17 @@ export default function Dashboard() {
     try {
       const response = await axios.post(`${BASE_URL}/category`, {
         category_name: category,
+      });
+
+      toast.success("Category Created", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
 
       const newCategory = response.data.data;
@@ -81,8 +117,25 @@ export default function Dashboard() {
     setIsEditModalOpen(true);
   };
 
+  const openDeleteModal = (category) => {
+    setEditingCategory(category);
+    setIsDeleteModalOpen(true);
+  };
+
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <SidebarAdmin />
       <div className="flex-1 ml-[300px] p-10 bg-slate-200 lg:h-full xl:h-[100vh]">
         <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md border mb-10">
@@ -93,8 +146,8 @@ export default function Dashboard() {
               </label>
               <input
                 type="text"
-                placeholder="Enter the title of your category"
-                className="input input-bordered w-full"
+                placeholder="Enter Category"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               />
@@ -133,7 +186,7 @@ export default function Dashboard() {
                     Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(category.category_id)}
+                    onClick={() => openDeleteModal(category)}
                     className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
                   >
                     Hapus
@@ -145,46 +198,21 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {isEditModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">Edit Category</h2>
-            <form onSubmit={handleEditSubmit}>
-              <div className="form-control mb-4">
-                <label className="label font-semibold text-gray-700">
-                  <span className="label-text">Category</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter the title of your category"
-                  className="input input-bordered w-full"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                />
-              </div>
+      <EditModal
+        isOpen={isEditModalOpen}
+        category={category}
+        error={error}
+        onSubmit={handleEditSubmit}
+        onCancel={() => setIsEditModalOpen(false)}
+        onCategoryChange={(e) => setCategory(e.target.value)}
+      />
 
-              {error && (
-                <div className="text-red-500 mb-4 text-center">{error}</div>
-              )}
-
-              <div className="form-control text-center">
-                <button
-                  type="submit"
-                  className="w-1/2 rounded-md bg-blue-400 px-2 py-2 font-bold"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
-            <button
-              onClick={() => setIsEditModalOpen(false)}
-              className="mt-4 w-full text-center text-gray-500 hover:text-gray-700"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        categoryName={editingCategory?.category_name}
+        onDelete={handleDelete}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function FormQuestion() {
   const [title, setTitle] = useState("");
@@ -46,7 +47,19 @@ export default function FormQuestion() {
           "Content-Type": "multipart/form-data",
         },
       });
-      window.location.reload();
+      toast.success("Product added successfully", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
 
       const data = response.data;
     } catch (err) {
@@ -55,7 +68,20 @@ export default function FormQuestion() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md border mb-10">
+    <div className="p-6 bg-white rounded-lg shadow-md border mb-10">
+      <h1 className="text-2xl font-bold text-center">Add New Question</h1>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <form onSubmit={handleSubmit}>
         <div className="form-control mb-4">
           <label className="label font-semibold text-gray-700">

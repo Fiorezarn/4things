@@ -10,7 +10,6 @@ const CommentSection = ({ review, BASE_URL }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  // Fungsi untuk mengambil data komentar
   async function fetchComments() {
     try {
       const res = await axios.get(`${BASE_URL}/review/${review.product_id}`);
@@ -20,12 +19,10 @@ const CommentSection = ({ review, BASE_URL }) => {
     }
   }
 
-  // Memanggil API untuk mengambil data komentar saat komponen dimount atau ada perubahan pada `review.product_id`
   useEffect(() => {
     fetchComments();
-  }, [review.product_id]); // Memanggil ulang setiap kali `review.product_id` berubah
+  }, [review.product_id]);
 
-  // Fungsi untuk menambah komentar baru
   const handleCommentSubmit = async () => {
     const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
     const user_id = userInfo?.user_id;
@@ -45,14 +42,13 @@ const CommentSection = ({ review, BASE_URL }) => {
 
     try {
       const res = await axios.post(`${BASE_URL}/review`, newCommentData);
-      setNewComment(""); // Kosongkan textarea setelah submit
-      fetchComments(); // Ambil ulang data komentar setelah komentar baru ditambahkan
+      setNewComment("");
+      fetchComments();
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
 
-  // Fungsi untuk menghapus komentar
   const handleDeleteComment = async (review_id) => {
     const user_id = JSON.parse(sessionStorage.getItem("userInfo"))?.user_id;
 
@@ -66,7 +62,6 @@ const CommentSection = ({ review, BASE_URL }) => {
     }
   };
 
-  // Render komentar
   const renderComments = () => {
     const currentUser = JSON.parse(
       sessionStorage.getItem("userInfo")
