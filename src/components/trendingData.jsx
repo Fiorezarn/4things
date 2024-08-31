@@ -11,6 +11,15 @@ export default function TrendingData(props) {
   function cardElement(allReview) {
     const navigate = useNavigate();
     const reviews = allReview.data;
+    if (reviews.length === 0) {
+      return (
+        <div className="border-2 rounded-lg">
+          <p className="text-center align-middle font-bold text-2xl">
+            No reviews yet.
+          </p>
+        </div>
+      );
+    }
 
     const reviewElements = reviews.map((review) => {
       const [likes, setLikes] = useState(0);

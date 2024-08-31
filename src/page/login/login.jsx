@@ -28,7 +28,17 @@ export default function Login() {
         const userInfo = sessionStorage.getItem("userInfo");
         const user = userInfo ? JSON.parse(userInfo).role : null;
         if (user === "admin") {
-          navigate("/admin");
+          toast.success("Login Successful", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => navigate("/admin"), 2500);
         } else if (user === "user") {
           toast.success("Login Successful", {
             position: "top-right",

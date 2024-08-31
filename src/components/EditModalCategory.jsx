@@ -1,6 +1,8 @@
 import React from "react";
 
-export default function EditModal({
+export default function EditModalCategory({
+  title,
+  label,
   isOpen,
   category,
   error,
@@ -13,11 +15,11 @@ export default function EditModal({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">Edit Category</h2>
+        <h2 className="text-2xl font-bold mb-4">Edit {title}</h2>
         <form onSubmit={onSubmit}>
           <div className="form-control mb-4">
             <label className="label font-semibold text-gray-700">
-              <span className="label-text">Category</span>
+              <span className="label-text">{label}</span>
             </label>
             <input
               type="text"

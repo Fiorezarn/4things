@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Banner from "../../assets/business-discussion.svg";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -29,8 +30,17 @@ export default function Register() {
       if (data.status === "success") {
         sessionStorage.setItem("accessToken", data.data.accessToken);
         sessionStorage.setItem("userInfo", JSON.stringify(data.data.user));
-        alert("Login Successful!");
-        navigate("/");
+        toast.success("Login Successful", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setTimeout(() => navigate("/"), 2500);
       } else {
         setError("Login failed. Please check your credentials.");
       }
@@ -40,6 +50,19 @@ export default function Register() {
   };
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+      />
       <Navbar />
       <div className="bg-gray-100 flex justify-center items-center h-screen">
         <div className="w-1/2 h-screen hidden lg:block">

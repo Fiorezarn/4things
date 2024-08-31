@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from "react";
 import { Await, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios, { all } from "axios";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineLike } from "react-icons/ai";
 import { Accordion } from "flowbite-react";
@@ -11,6 +11,16 @@ export default function HomeData(props) {
   function cardElement(allReview) {
     const navigate = useNavigate();
     const reviews = allReview.data;
+
+    if (reviews.length === 0) {
+      return (
+        <div className="border-2 rounded-lg">
+          <p className="text-center align-middle font-bold text-2xl">
+            No reviews yet.
+          </p>
+        </div>
+      );
+    }
 
     const reviewElements = reviews.map((review) => {
       const [likes, setLikes] = useState(0);
@@ -106,7 +116,7 @@ export default function HomeData(props) {
             </div>
           </div>
           <img
-            className="w-1/2 text-center justify-center mx-auto rounded-3xl"
+            className="w-[700px]  text-center justify-center mx-auto rounded-3xl"
             src={review.product_image}
             alt={review.product_name}
           />

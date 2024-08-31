@@ -1,9 +1,13 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export async function getAllReview() {
-  const res = await fetch(`${BASE_URL}/product`);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${BASE_URL}/product`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+  }
 }
 
 export async function getTrendingReview() {

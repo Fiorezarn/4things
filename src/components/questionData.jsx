@@ -10,17 +10,64 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Dropdown } from "flowbite-react";
 import FormQuestion from "./formQuestion";
 import DeleteModal from "../components/DeleteModal";
+import EditModalQuestion from "../components/EditModalQuestion"; // Ensure correct import path
 
 export default function QuestionData(props) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [editingCategory, setEditingCategory] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Edit modal state
+  const [editingProduct, setEditingProduct] = useState(null); // State to store product being edited
+  const [error, setError] = useState("");
+
   const openDeleteModal = (review) => {
-    setEditingCategory(review);
+    setEditingProduct(review);
     setIsDeleteModalOpen(true);
   };
+
+  const openEditModal = (review) => {
+    setEditingProduct(review);
+    setIsEditModalOpen(true);
+  };
+
+  const handleInputChange = (e) => {
+    setEditingProduct({ ...editingProduct, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    setEditingProduct({ ...editingProduct, file: e.target.files[0] });
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("product_name", editingProduct.product_name);
+      formData.append("product_desc", editingProduct.product_desc);
+      formData.append("file", editingProduct.file);
+      formData.append("category_id", editingProduct.category_id);
+
+      await axios.put(
+        `${import.meta.env.VITE_BASE_URL}/product/${editingProduct.product_id}`,
+        formData
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error("Error updating product:", error);
+      setError("Failed to update product. Please try again.");
+    }
+  };
+
   function cardElement(allReview) {
     const navigate = useNavigate();
     const reviews = allReview.data;
+    if (reviews.length === 0) {
+      return (
+        <div className="border-2 rounded-lg">
+          <p className="text-center align-middle font-bold text-2xl">
+            No reviews yet.
+          </p>
+        </div>
+      );
+    }
 
     const reviewElements = reviews.map((review) => {
       const [likes, setLikes] = useState(0);
@@ -101,12 +148,12 @@ export default function QuestionData(props) {
 
       const handleDelete = async () => {
         try {
-          await axios.delete(`${BASE_URL}/likes/${editingCategory.product_id}`);
+          await axios.delete(`${BASE_URL}/likes/${editingProduct.product_id}`);
           await axios.delete(
-            `${BASE_URL}/review/product/${editingCategory.product_id}`
+            `${BASE_URL}/review/product/${editingProduct.product_id}`
           );
           await axios.delete(
-            `${BASE_URL}/product/${editingCategory.product_id}`
+            `${BASE_URL}/product/${editingProduct.product_id}`
           );
           window.location.reload();
         } catch (error) {
@@ -135,6 +182,9 @@ export default function QuestionData(props) {
                 onClick={() => openDeleteModal(review)}
               >
                 Delete
+              </Dropdown.Item>
+              <Dropdown.Item as="button" onClick={() => openEditModal(review)}>
+                Update
               </Dropdown.Item>
             </Dropdown>
           </div>
@@ -173,9 +223,18 @@ export default function QuestionData(props) {
           </Accordion>
           <DeleteModal
             isOpen={isDeleteModalOpen}
-            categoryName={editingCategory?.product_name}
+            categoryName={editingProduct?.product_name}
             onDelete={handleDelete}
             onCancel={() => setIsDeleteModalOpen(false)}
+          />
+          <EditModalQuestion
+            isOpen={isEditModalOpen}
+            product={editingProduct}
+            error={error}
+            onSubmit={handleEditSubmit}
+            onCancel={() => setIsEditModalOpen(false)}
+            onInputChange={handleInputChange}
+            onFileChange={handleFileChange}
           />
         </div>
       );

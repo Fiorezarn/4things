@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SidebarAdmin from "../../components/SidebarAdmin";
 import { ToastContainer, toast } from "react-toastify";
-import EditModal from "../../components/EditModal";
+import EditModal from "../../components/EditModalCategory";
 import DeleteModal from "../../components/DeleteModal";
 import { Await, useNavigate } from "react-router-dom";
 
@@ -18,6 +18,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("accessToken");
+    const userInfo = sessionStorage.getItem("userInfo");
+    const user = userInfo ? JSON.parse(userInfo).role : null;
+
+    if (user !== "admin") {
+      return navigate("/");
+    }
 
     if (!isLoggedIn) {
       return navigate("/login");
@@ -199,6 +205,8 @@ export default function Dashboard() {
       </div>
 
       <EditModal
+        title="Category"
+        label="Edit Category"
         isOpen={isEditModalOpen}
         category={category}
         error={error}

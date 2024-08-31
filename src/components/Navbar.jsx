@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Dropdown } from "flowbite-react";
+import { SiSmartthings } from "react-icons/si";
 
 export default function Navbar() {
   const [userInfo, setUserInfo] = useState(null);
@@ -43,8 +44,11 @@ export default function Navbar() {
 
   return (
     <nav className="w-full h-14 border-b-2 flex justify-between items-center px-10">
-      <a href="/" className="w-36 py-1 font-bold text-2xl">
-        4Things
+      <a
+        href="/"
+        className="w-36 py-1 font-bold text-2xl flex gap-2 items-center"
+      >
+        <SiSmartthings /> 4Things
       </a>
       <div className="flex gap-2">
         <a href="/" className="w-36 py-1 font-bold text-xl">

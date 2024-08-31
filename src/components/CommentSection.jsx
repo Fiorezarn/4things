@@ -72,30 +72,25 @@ const CommentSection = ({ review, BASE_URL }) => {
     }
 
     return (
-      <Accordion collapseAll>
+      <div>
         {comments.map((comment, index) => (
-          <Accordion.Panel key={index}>
-            <Accordion.Title className="bg-transparent hover:bg-transparent focus:ring-transparent flex justify-between items-center">
-              Comment by {comment.created_by}
+          <div key={index} className="p-4 mb-4 border-b border-gray-200">
+            <div className="flex justify-between items-center">
+              <div className="profile flex items-center">
+                <CgProfile className="text-3xl mr-3" />
+                <p>{comment.created_by}</p>
+              </div>
               {comment.created_by === currentUser && (
                 <AiOutlineDelete
                   className="text-red-500 cursor-pointer"
                   onClick={() => handleDeleteComment(comment.review_id)}
                 />
               )}
-            </Accordion.Title>
-            <Accordion.Content className="px-5 py-3">
-              <div className="comments pb-4">
-                <div className="profile flex mr-4 items-center mb-2">
-                  <CgProfile className="text-3xl mr-3" />
-                  <p>{comment.created_by}</p>
-                </div>
-                <p>{comment.review_value}</p>
-              </div>
-            </Accordion.Content>
-          </Accordion.Panel>
+            </div>
+            <p className="mt-2">{comment.review_value}</p>
+          </div>
         ))}
-      </Accordion>
+      </div>
     );
   };
 
