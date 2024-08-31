@@ -21,7 +21,6 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
 
   - **React.js:** Library JavaScript untuk membangun antarmuka pengguna.
   - **React Router:** Untuk navigasi di dalam aplikasi.
-  - **Redux Toolkit:** Untuk mengelola state global aplikasi.
   - **Axios:** Untuk melakukan request HTTP ke backend.
   - **Flowbite React:** Komponen UI berbasis Tailwind CSS.
   - **Tailwind CSS:** Framework CSS untuk desain yang responsif dan modern.
@@ -34,6 +33,7 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
   - **Nest.js:** Framework web untuk Node.js.
   - **MySQL:** Basis data SQL untuk menyimpan data pengguna, produk, dan pertanyaan.
   - **Sequelize & Sequelize-Typescript:** ORM untuk mengelola database.
+  - **JWT (JSON Web Token):** Untuk autentikasi berbasis token.
   - **TypeScript:** Bahasa pemrograman berbasis JavaScript dengan tipe statis.
 
 
@@ -43,6 +43,7 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
 git clone -b 4things-be https://github.com/Fiorezarn/4things.git
 cd 4things-be
 npm i
+Pastikan server web lokal seperti Laragon atau XAMPP sudah berjalan dan terhubung dan buat database dengan nama 4things.
 npm run start:dev
 ```
 
@@ -56,4 +57,60 @@ npm run dev
 ```
 
 ### Cara Menggunakan Aplikasi
+
+*Cara membuat akun baru:*
+
+```bash
+1. Buka aplikasi 4Things di browser Anda (misalnya: http://localhost:3000)
+2. Klik tombol "Register" di halaman utama
+3. Isi formulir pendaftaran dengan informasi yang diperlukan:
+   - Nama
+   - Email
+   - Kata sandi
+4. Klik tombol "Register" untuk menyelesaikan proses pendaftaran
+5. Akun baru Anda akan dibuat, dan Anda akan otomatis masuk ke dalam aplikasi
+```
+
+*Cara Membuat Pertanyaan Baru di My Questions:*
+
+```bash
+1. Setelah login, navigasikan ke halaman "My Questions" menggunakan menu navigasi
+2. Klik tombol "Create Question" untuk membuat pertanyaan baru
+3. Masukkan judul pertanyaan pada kolom "Question Title"
+4. Masukkan deskripsi pertanyaan pada kolom "Question Description"
+5. Klik tombol "Submit" untuk mengajukan pertanyaan Anda
+6. Pertanyaan baru Anda akan ditambahkan ke daftar pertanyaan di halaman "My Questions"
+```
+
+*Cara Menjelajahi Halaman Home dan Trending serta Berinteraksi:*
+
+```bash
+1. Navigasikan ke halaman "Home" untuk melihat produk dan pertanyaan terbaru
+2. Navigasikan ke halaman "Trending" untuk melihat produk dan pertanyaan yang sedang trending berdasarkan jumlah like terbanyak
+3. Untuk memberikan komentar pada postingan orang lain:
+   - Pilih postingan yang ingin Anda komentari
+   - Masukkan komentar Anda di kolom komentar
+   - Klik tombol "Submit" untuk mengirimkan komentar
+4. Untuk memberikan like pada postingan orang lain:
+   - Klik ikon "Like" pada postingan yang ingin Anda sukai
+   - Jumlah like akan otomatis bertambah
+```
+
+*Cara Mengelola Kategori sebagai Admin:*
+
+```bash
+1. Login sebagai admin menggunakan akun yang memiliki hak akses admin
+2. Navigasikan ke halaman "Manage Categories" di panel admin
+3. Untuk menambahkan kategori baru:
+   - Klik tombol "Add Category"
+   - Masukkan nama kategori baru di kolom yang disediakan
+   - Klik tombol "Save" untuk menyimpan kategori baru
+4. Untuk mengedit kategori yang ada:
+   - Klik ikon "Edit" di samping kategori yang ingin Anda ubah
+   - Lakukan perubahan pada nama kategori
+   - Klik tombol "Save" untuk menyimpan perubahan
+5. Untuk menghapus kategori:
+   - Klik ikon "Delete" di samping kategori yang ingin Anda hapus
+   - Konfirmasi penghapusan dengan mengklik tombol "Delete" pada dialog konfirmasi
+```
 
