@@ -33,9 +33,7 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
 
   - **Nest.js:** Framework web untuk Node.js.
   - **MySQL:** Basis data SQL untuk menyimpan data pengguna, produk, dan pertanyaan.
-  - **Dotenv:** Untuk mengelola variabel lingkungan.
   - **Sequelize & Sequelize-Typescript:** ORM untuk mengelola database.
-  - **Jest:** Untuk pengujian unit dan integrasi.
   - **TypeScript:** Bahasa pemrograman berbasis JavaScript dengan tipe statis.
 
 
