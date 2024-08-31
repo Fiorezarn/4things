@@ -56,7 +56,7 @@ npm i
 npm run dev
 ```
 
-### Cara Menggunakan Aplikasi
+### 3. Cara Menggunakan Aplikasi
 
 *Cara membuat akun baru:*
 
@@ -64,9 +64,10 @@ npm run dev
 1. Buka aplikasi 4Things di browser Anda (misalnya: http://localhost:3000)
 2. Klik tombol "Register" di halaman utama
 3. Isi formulir pendaftaran dengan informasi yang diperlukan:
-   - Nama
+   - Username
+   - Fullname
    - Email
-   - Kata sandi
+   - Password
 4. Klik tombol "Register" untuk menyelesaikan proses pendaftaran
 5. Akun baru Anda akan dibuat, dan Anda akan otomatis masuk ke dalam aplikasi
 ```
@@ -75,9 +76,10 @@ npm run dev
 
 ```bash
 1. Setelah login, navigasikan ke halaman "My Questions" menggunakan menu navigasi
-2. Klik tombol "Create Question" untuk membuat pertanyaan baru
-3. Masukkan judul pertanyaan pada kolom "Question Title"
-4. Masukkan deskripsi pertanyaan pada kolom "Question Description"
+3. Masukkan judul pertanyaan pada field "Question Title"
+3. Masukkan category pada field "Question Category"
+4. Masukkan deskripsi pertanyaan pada field "Question Description"
+4. Masukkan image pertanyaan pada field "File"
 5. Klik tombol "Submit" untuk mengajukan pertanyaan Anda
 6. Pertanyaan baru Anda akan ditambahkan ke daftar pertanyaan di halaman "My Questions"
 ```
@@ -100,7 +102,7 @@ npm run dev
 
 ```bash
 1. Login sebagai admin menggunakan akun yang memiliki hak akses admin
-2. Navigasikan ke halaman "Manage Categories" di panel admin
+2. Navigasikan ke halaman "Dashboard" di panel admin
 3. Untuk menambahkan kategori baru:
    - Klik tombol "Add Category"
    - Masukkan nama kategori baru di kolom yang disediakan
