@@ -115,32 +115,34 @@ _Cara Mengelola Kategori sebagai Admin:_
    - Konfirmasi penghapusan dengan mengklik tombol "Delete" pada dialog konfirmasi
 ```
 
-\*\*\*4. Dokumentasi Program
+## 4. Dokumentasi Program
 
-## Halaman Home
-
-![alt text](https://github.com/Fiorezarn/4things/blob/main/image/homepage.png?raw=true)
-
-## Halaman Trending
-
-![alt text](https://github.com/Fiorezarn/4things/blob/main/image/trendingpage.png?raw=true)
-
-## Halaman MyQuestion
-
-![alt text](https://github.com/Fiorezarn/4things/blob/main/image/questionpage.png?raw=true)
-
-## Halaman Dashboard
-
-![alt text](https://github.com/Fiorezarn/4things/blob/main/image/dashboardpage.png?raw=true)
-
-## Halaman Login
+### Halaman Login
 
 ![alt text](https://github.com/Fiorezarn/4things/blob/main/image/loginpage.png?raw=true)
 
-## Halaman Register
+### Halaman Register
 
 ![alt text](https://github.com/Fiorezarn/4things/blob/main/image/registerpage.png?raw=true)
 
-## Halaman Forgot Password
+### Halaman Forgot Password
 
 ![alt text](https://github.com/Fiorezarn/4things/blob/main/image/forgotpage.png?raw=true)
+
+### Halaman Home
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/homepage.png?raw=true)
+
+### Halaman Trending
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/trendingpage.png?raw=true)
+
+### Halaman MyQuestion
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/questionpage.png?raw=true)
+
+### Halaman Dashboard
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/dashboardpage.png?raw=true)
+
+
