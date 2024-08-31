@@ -36,7 +36,6 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
   - **JWT (JSON Web Token):** Untuk autentikasi berbasis token.
   - **TypeScript:** Bahasa pemrograman berbasis JavaScript dengan tipe statis.
 
-
 ### 1. Clone Repositori Back-End
 
 ```bash
@@ -58,7 +57,7 @@ npm run dev
 
 ### 3. Cara Menggunakan Aplikasi
 
-*Cara membuat akun baru:*
+_Cara membuat akun baru:_
 
 ```bash
 1. Buka aplikasi 4Things di browser Anda (misalnya: http://localhost:3000)
@@ -72,7 +71,7 @@ npm run dev
 5. Akun baru Anda akan dibuat, dan Anda akan otomatis masuk ke dalam aplikasi
 ```
 
-*Cara Membuat Pertanyaan Baru di My Questions:*
+_Cara Membuat Pertanyaan Baru di My Questions:_
 
 ```bash
 1. Setelah login, navigasikan ke halaman "My Questions" menggunakan menu navigasi
@@ -84,7 +83,7 @@ npm run dev
 6. Pertanyaan baru Anda akan ditambahkan ke daftar pertanyaan di halaman "My Questions"
 ```
 
-*Cara Menjelajahi Halaman Home dan Trending serta Berinteraksi:*
+_Cara Menjelajahi Halaman Home dan Trending serta Berinteraksi:_
 
 ```bash
 1. Navigasikan ke halaman "Home" untuk melihat produk dan pertanyaan terbaru
@@ -98,7 +97,7 @@ npm run dev
    - Jumlah like akan otomatis bertambah
 ```
 
-*Cara Mengelola Kategori sebagai Admin:*
+_Cara Mengelola Kategori sebagai Admin:_
 
 ```bash
 1. Login sebagai admin menggunakan akun yang memiliki hak akses admin
@@ -116,3 +115,32 @@ npm run dev
    - Konfirmasi penghapusan dengan mengklik tombol "Delete" pada dialog konfirmasi
 ```
 
+\*\*\*4. Dokumentasi Program
+
+## Halaman Home
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/homepage.png?raw=true)
+
+## Halaman Trending
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/trendingpage.png?raw=true)
+
+## Halaman MyQuestion
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/questionpage.png?raw=true)
+
+## Halaman Dashboard
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/dashboardpage.png?raw=true)
+
+## Halaman Login
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/loginpage.png?raw=true)
+
+## Halaman Register
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/registerpage.png?raw=true)
+
+## Halaman Forgot Password
+
+![alt text](https://github.com/Fiorezarn/4things/blob/main/image/forgotpage.png?raw=true)
