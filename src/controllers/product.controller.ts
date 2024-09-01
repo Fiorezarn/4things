@@ -171,13 +171,16 @@ export class ProductController {
           'Product tidak ditemukan',
         );
       }
-
-      let filePath = `public/${product.file}`;
-
       if (file && file.buffer) {
-        fs.unlinkSync(filePath);
-        filePath = `public/${file.originalname}`;
-        fs.writeFileSync(filePath, file.buffer);
+        let filePath = `public/${products.file}`;
+        const newFilePath = `public/${file.originalname}`;
+        try {
+          fs.unlinkSync(filePath);
+        } catch (error) {
+          console.log(error);
+        }
+        fs.writeFileSync(newFilePath, file.buffer);
+        filePath = newFilePath;
       }
 
       if (!file) {
