@@ -1,6 +1,6 @@
 # 4Things
 
-4Things adalah aplikasi web yang memungkinkan pengguna untuk berbagi, menilai, dan bertanya tentang produk yang mereka minati. Pengguna dapat menjelajahi produk terbaru, melihat produk yang sedang tren, serta mengelola pertanyaan dan jawaban terkait produk.
+4Things adalah aplikasi berbasis website yang memungkinkan pengguna untuk berbagi, menilai, dan bertanya tentang produk yang mereka minati. Pengguna dapat menjelajahi produk terbaru, melihat produk yang sedang tren, serta mengelola pertanyaan dan jawaban terkait produk.
 
 ## Deskripsi Proyek
 
@@ -12,6 +12,7 @@ Aplikasi ini menawarkan fitur-fitur berikut:
 - **Authentication:** Fitur login untuk mengakses dan mengelola konten pribadi.
 - **Registration:** Fitur untuk mendaftarkan akun baru.
 - **Forgot Password:** Fitur untuk memulihkan kata sandi yang terlupa.
+- **Dashboard:** Fitur untuk admin mengelola dan menampilkan category.
 
 ## Tech Stack
 
@@ -36,6 +37,8 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
   - **JWT (JSON Web Token):** Untuk autentikasi berbasis token.
   - **TypeScript:** Bahasa pemrograman berbasis JavaScript dengan tipe statis.
 
+## Cara Install Project
+
 ### 1. Clone Repositori Back-End
 
 ```bash
@@ -55,12 +58,12 @@ npm i
 npm run dev
 ```
 
-### 3. Cara Menggunakan Aplikasi
+## Cara Menggunakan Aplikasi
 
 _Cara membuat akun baru:_
 
 ```bash
-1. Buka aplikasi 4Things di browser Anda (misalnya: http://localhost:3000)
+1. Buka project 4Things di browser Anda (misalnya: http://localhost:3000)
 2. Klik tombol "Register" di halaman utama
 3. Isi formulir pendaftaran dengan informasi yang diperlukan:
    - Username
@@ -68,7 +71,7 @@ _Cara membuat akun baru:_
    - Email
    - Password
 4. Klik tombol "Register" untuk menyelesaikan proses pendaftaran
-5. Akun baru Anda akan dibuat, dan Anda akan otomatis masuk ke dalam aplikasi
+5. Akun baru Anda akan dibuat, dan Anda akan otomatis masuk ke dalam halaman home
 ```
 
 _Cara Membuat Pertanyaan Baru di My Questions:_
