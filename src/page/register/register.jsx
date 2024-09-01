@@ -141,8 +141,8 @@ export default function Register() {
           </form>
 
           <div className="mt-6 text-blue-500 text-center">
-            <a href="#" className="hover:underline">
-              Sign up Here
+            <a href="/login" className="hover:underline">
+              Login Here
             </a>
           </div>
         </div>

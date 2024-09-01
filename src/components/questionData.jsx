@@ -10,13 +10,15 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Dropdown } from "flowbite-react";
 import FormQuestion from "./formQuestion";
 import DeleteModal from "../components/DeleteModal";
-import EditModalQuestion from "../components/EditModalQuestion"; // Ensure correct import path
+import EditModalQuestion from "../components/EditModalQuestion";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function QuestionData(props) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Edit modal state
-  const [editingProduct, setEditingProduct] = useState(null); // State to store product being edited
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
   const [error, setError] = useState("");
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const openDeleteModal = (review) => {
     setEditingProduct(review);
@@ -42,14 +44,28 @@ export default function QuestionData(props) {
       const formData = new FormData();
       formData.append("product_name", editingProduct.product_name);
       formData.append("product_desc", editingProduct.product_desc);
-      formData.append("file", editingProduct.file);
+      if (editingProduct.file) {
+        formData.append("file", editingProduct.file);
+      }
       formData.append("category_id", editingProduct.category_id);
-
       await axios.put(
-        `${import.meta.env.VITE_BASE_URL}/product/${editingProduct.product_id}`,
+        `${BASE_URL}/product/${editingProduct.product_id}`,
         formData
       );
-      window.location.reload();
+      setIsEditModalOpen(false);
+      toast.success("Product updated successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (error) {
       console.error("Error updating product:", error);
       setError("Failed to update product. Please try again.");
@@ -72,7 +88,6 @@ export default function QuestionData(props) {
     const reviewElements = reviews.map((review) => {
       const [likes, setLikes] = useState(0);
       const [isLiked, setIsLiked] = useState(false);
-      const BASE_URL = import.meta.env.VITE_BASE_URL;
 
       useEffect(() => {
         async function fetchLikes() {
@@ -166,6 +181,18 @@ export default function QuestionData(props) {
           className="flex flex-col gap-10 border-b-2 pb-14 mb-5 border-2 rounded-2xl p-6"
           key={review.product_id}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <div className="flex justify-between">
             <h2 className="title font-bold text-3xl">{review.product_name}</h2>
             <Dropdown

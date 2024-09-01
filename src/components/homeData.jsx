@@ -116,7 +116,7 @@ export default function HomeData(props) {
             </div>
           </div>
           <img
-            className="w-[700px]  text-center justify-center mx-auto rounded-3xl"
+            className="w-1/2  text-center justify-center mx-auto rounded-3xl"
             src={review.product_image}
             alt={review.product_name}
           />

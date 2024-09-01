@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function EditModalProduct({
   isOpen,
@@ -9,6 +10,27 @@ export default function EditModalProduct({
   onInputChange,
   onFileChange,
 }) {
+  const [categoryList, setCategoryList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const BASE_URL = import.meta.env.VITE_BASE_URL;
+        const response = await axios.get(`${BASE_URL}/category`);
+        setCategoryList(response.data.data);
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      }
+    }
+    fetchCategories();
+  }, []);
+  useEffect(() => {
+    if (product) {
+      setSelectedCategory(product.category_id || "");
+    }
+  }, [product]);
+
   if (!isOpen) return null;
 
   return (
@@ -55,19 +77,20 @@ export default function EditModalProduct({
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label font-semibold text-gray-700">
-              <span className="label-text">Category ID</span>
-            </label>
-            <input
-              type="number"
-              name="category_id"
-              placeholder="Enter Category ID"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={product.category_id}
-              onChange={onInputChange}
-            />
-          </div>
+          <select
+            className="select select-bordered w-full mb-4"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option disabled value="">
+              Select a category
+            </option>
+            {categoryList.map((category) => (
+              <option key={category.category_id} value={category.category_id}>
+                {category.category_name}
+              </option>
+            ))}
+          </select>
 
           {error && (
             <div className="text-red-500 mb-4 text-center">{error}</div>
