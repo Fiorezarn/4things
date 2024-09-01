@@ -118,7 +118,7 @@ _Cara Mengelola Kategori sebagai Admin:_
    - Konfirmasi penghapusan dengan mengklik tombol "Delete" pada dialog konfirmasi
 ```
 
-## 4. Dokumentasi Program
+## Dokumentasi Aplikasi
 
 ### Halaman Login
 
